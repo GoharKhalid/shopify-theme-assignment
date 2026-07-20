@@ -1,0 +1,48 @@
+{{ 'product-badge.css' | asset_url | stylesheet_tag }}
+<div class="product-card">
+    <div class="image-container">
+        <div class="product-image">
+            {% if product.featured_image %}
+                    <img src="{{ product.featured_image | image_url: width: 1200 }} "alt="{{ product.title }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+            {% endif %}
+        </div>
+        <div class="product-badges">
+            <div class="badge"> 
+                {% if product.compare_at_price < product.price %}
+                    <span><p>Sale!</p></span>
+                {% endif %}
+            </div>
+            <div class="product-availability">
+                {% if product.available %}
+                    <span class="in-stock">In Stock</span>
+                {% else %}
+                    <span class="out-of-stock">Out of Stock</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="product-details">
+        <div class="product-info">
+            <h2>{{ product.title }}</h2>
+            <p>{{ product.description | truncate:100 }}</p>
+        </div>
+        <div class="product-price-section">
+            <div class="product-price">
+                <h3>{{ product.price | money_with_currency }}</h3>
+            </div>
+            <div class="product-attribute">
+                {% for option in product.options_with_values %}
+                <p>
+                    {{ option.name }}:
+                    {{ option.values | join: ', ' }}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="product-actions">
+            <button class="view-product-button">
+                <a href="{{ product.url }}" class="view-product-button">View Product</a>
+            </button>
+        </div>
+    </div>
+</div>

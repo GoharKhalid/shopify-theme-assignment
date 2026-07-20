@@ -9,8 +9,9 @@
 {% capture children %}
   {% content_for 'blocks', closest.product: product %}
 {% endcapture %}
-
-{% render 'product-card', children: children, product: product, product_view_context: product_view_context %}
+{% comment %} 
+{% render 'product-card', children: children, product: product, product_view_context: product_view_context %} {% endcomment %}
+{% render 'product-badge', product: product %}
 {% render 'buy-buttons-styles' %}
 {% render 'gift-card-recipient-form-styles' %}
 {% render 'quick-add-styles' %}
